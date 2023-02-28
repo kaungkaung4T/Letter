@@ -1,1 +1,0 @@
-#Django Framework with CBV and FBV with ajax, QR, API
