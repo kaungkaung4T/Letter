@@ -4,3 +4,11 @@
 
 
 <h1>hello</h1>
+
+
+<form action="{% url 'index' %}" method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+
+    <button>submit</button>
+
+</form>
