@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 from django.core.mail import send_mail, EmailMessage
 class home:
     def index(self, request):
+        
         if request.method == "POST":
             title = "title"
             body = "wefiwefjiowejfoiewf"
@@ -12,7 +13,10 @@ class home:
                              to=['kaungminkhant4t99@gmail.com'])
             e.send()
             return redirect("/")
+        
+        p = request
 
-        return render(request, 'index.html')
+        return render(request, 'index.html',
+                        {"p": p})
 
 
