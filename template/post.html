@@ -5,6 +5,16 @@
 
 
 <form action="{% url 'post' %}" method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+    {{ app2 }}
+<button>SUbmite</button>
+</form>
+
+
+<br><br><br>
+
+
+<form action="{% url 'post' %}" method="POST" enctype="multipart/form-data" style="margin-bottom: 50px;">
     {% csrf_token %}
 
     <label for="name">Name</label>
@@ -13,6 +23,20 @@
     
 </form>
 
+
+{% for apps in app %}
+
+{{ apps.user.username }}
+{{ apps.name }}
+
+<div style="display: flex;">
+<a href="{% url 'update' apps.id %}"><h3>Update</h3></a>&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="{% url 'delete' apps.id %}"><h3>Delete</h3></a>&nbsp;&nbsp;&nbsp;&nbsp;
+</div>
+
+<br><br>
+
+{% endfor %}
 
 </div>
 

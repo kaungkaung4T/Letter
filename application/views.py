@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from application.models import AppModel
+from application.form import AppModelForm
 from application.serializer import AppModelSerializer
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
@@ -25,16 +26,57 @@ class Home:
                         {"p": p})
 
 
+
 class Post:
     def post(self, request):
         if request.method == 'POST':    
-            name = request.POST['namer']
-            print(request.POST)
+            # name = request.POST['namer']
+            app = AppModelForm(request.POST, request.FILES)
+            
+            if app.is_valid():
+                print("hello")
+                s_app = app.save(commit=False)
+                s_app.user = request.user
+                app.save()
+            
             return redirect('post')
         
 
-        return render(request, 'post.html')
+        app = AppModel.objects.all()
 
+        app2 = AppModelForm()
+        context = {
+            'app':app,
+            'app2':app2
+        }
+
+        return render(request, 'post.html',
+                        context)
+
+
+    def update(self, request, id):
+        if request.method == 'POST':
+            name = request.POST['namer']
+
+            app = AppModel.objects.get(id=id)
+            
+            return redirect('post')
+
+
+        app = AppModel.objects.get(id=id)
+        context = {
+            'app':app
+        }
+        return render(request, 'update.html',
+                        context)
+
+
+    def delete(self, request, id):
+        
+        m = AppModel.objects.get(id=id)
+        m.delete()
+
+        return redirect('post')
 
 
 

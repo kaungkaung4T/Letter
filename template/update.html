@@ -1,0 +1,16 @@
+
+
+
+
+
+<div style="margin: auto;width: 300px;margin-top: 150px;">
+
+<form action="{% url 'update' app.id %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <label for="name">Name</label>
+    <input type="text" id="name" name="namer" value="{{ app.name }}">
+    <button>Submit</button>
+</form>
+
+</div>
