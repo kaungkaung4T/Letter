@@ -3,7 +3,9 @@ from application import views
 
 
 urlpatterns = [
-    path('', views.home().index, name='index'),
+    path('', views.Home().index, name='index'),
+
+    path('post', views.Post().post, name='post'),
 
     path('api', views.API.as_view(), name='api'),
     path('api/put/<str:id>', views.API.as_view(), name='put'),

@@ -8,7 +8,7 @@ from rest_framework.response import Response
 # Create your views here.
 
 from django.core.mail import send_mail, EmailMessage
-class home:
+class Home:
     def index(self, request):
         
         if request.method == "POST":
@@ -23,6 +23,13 @@ class home:
 
         return render(request, 'index.html',
                         {"p": p})
+
+
+class Post:
+    def post(self, request):
+        return render(request, 'post.html')
+
+
 
 
 class API(APIView):
@@ -55,3 +62,5 @@ class API(APIView):
             "success":"success"
         }
         return Response(data=data)
+
+
