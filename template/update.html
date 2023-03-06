@@ -5,6 +5,14 @@
 
 <div style="margin: auto;width: 300px;margin-top: 150px;">
 
+
+    <form action="{% url 'update' app.id %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+            {{ app2 }}
+<button>Subite</button>
+    </form>
+
+
 <form action="{% url 'update' app.id %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
 

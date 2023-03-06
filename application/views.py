@@ -9,6 +9,8 @@ from rest_framework.response import Response
 # Create your views here.
 
 from django.core.mail import send_mail, EmailMessage
+
+
 class Home:
     def index(self, request):
         
@@ -34,10 +36,9 @@ class Post:
             app = AppModelForm(request.POST, request.FILES)
             
             if app.is_valid():
-                print("hello")
                 s_app = app.save(commit=False)
                 s_app.user = request.user
-                app.save()
+                s_app.save()
             
             return redirect('post')
         
@@ -46,8 +47,8 @@ class Post:
 
         app2 = AppModelForm()
         context = {
-            'app':app,
-            'app2':app2
+            'app': app,
+            'app2': app2
         }
 
         return render(request, 'post.html',
@@ -56,16 +57,21 @@ class Post:
 
     def update(self, request, id):
         if request.method == 'POST':
-            name = request.POST['namer']
+            # name = request.POST['namer']
 
             app = AppModel.objects.get(id=id)
-            
+            appform = AppModelForm(request.POST, request.FILES, instance=app)
+            if appform.is_valid:
+                appform.save()
+                
             return redirect('post')
 
 
         app = AppModel.objects.get(id=id)
+        app2 = AppModelForm(instance=app)
         context = {
-            'app':app
+            'app': app,
+            'app2': app2
         }
         return render(request, 'update.html',
                         context)
