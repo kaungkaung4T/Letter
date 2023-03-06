@@ -27,6 +27,12 @@ class Home:
 
 class Post:
     def post(self, request):
+        if request.method == 'POST':    
+            name = request.POST['namer']
+            print(request.POST)
+            return redirect('post')
+        
+
         return render(request, 'post.html')
 
 
