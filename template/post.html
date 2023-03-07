@@ -44,18 +44,12 @@
 
 {% endfor %}
 
-<div style="display: flex;">
-    <h1 id="magic"> </h1>
-    <a href=""><h3>Update</h3></a>&nbsp;&nbsp;&nbsp;&nbsp;
-    <a href=""><h3>Delete</h3></a>&nbsp;&nbsp;&nbsp;&nbsp;
-    </div>
-    
-    <br>
+
+
+<div id="data_magic">
 
 
 </div>
-
-
 
 <script>
     
@@ -75,4 +69,27 @@
         });
         });
 
+
+        $(document).ready(function(){
+            
+            function fun () {
+                $.ajax({
+                    'type': 'GET',
+                    'url': '/post/js',
+                    'success': function (response) {
+                        var dm = $('#data_magic');
+                        dm.empty();
+                        for (var gg in response.am) {
+                            var t = response.am[gg];
+                            dm.append(t.id);
+                        };
+                        
+                    },
+                    
+                });
+            };
+
+            setInterval(fun, 1000);
+
+        });
 </script>

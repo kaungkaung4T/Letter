@@ -9,7 +9,7 @@ from rest_framework.response import Response
 # Create your views here.
 
 from django.core.mail import send_mail, EmailMessage
-
+from django.http import JsonResponse
 
 class Home:
     def index(self, request):
@@ -30,6 +30,13 @@ class Home:
 
 
 class Post:
+    def js(self, request):
+        am = AppModel.objects.all()
+        context = {
+            "am": list(am.values())
+        }
+        return JsonResponse(context)
+
     def post(self, request):
         if request.method == 'POST':    
             name = request.POST['namer']
