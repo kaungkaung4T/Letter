@@ -19,25 +19,29 @@
     {% csrf_token %}
 
     <label for="name">Name</label>
-    <input type="text" id="name" name="namer">
+
+    <input type="text" id="namer" name="namer">
     <button>Submit</button>
     
 </form>
 
 
 <script>
-        $(document).ready(function(){
-            $('#form').submit(function(){
+        $(document).on("submit", "#form", function(e){
+                            e.preventDefault();
                 $.ajax({
-                'url': '/post',
-                'method': 'post',
-                'data': {
-                    'name': $('#id').value()
-                }
+                type: 'POST',
+                url: '/post',
+                data: {
+                    name: $('#namer').val(),
+                    csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
+                },
+                'error': function(e){
+                    alert(e.fail);
+                }  
 
             });
             });
-        });
 
 </script>
 

@@ -33,7 +33,7 @@ class Post:
     def post(self, request):
         if request.method == 'POST':    
             name = request.POST['namer']
-            # original_app = AppModel.objects.create(user=request.user, name=name)
+            original_app = AppModel.objects.create(user=request.user, name=name)
 
             app = AppModelForm(request.POST, request.FILES)
             
