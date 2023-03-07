@@ -11,6 +11,7 @@ from rest_framework.response import Response
 from django.core.mail import send_mail, EmailMessage
 from django.http import JsonResponse
 
+
 class Home:
     def index(self, request):
         
