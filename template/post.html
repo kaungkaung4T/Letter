@@ -45,6 +45,9 @@
 {% endfor %}
 
 
+<input id="create_response" hidden>
+
+</input>
 
 <div id="data_magic">
 
@@ -52,7 +55,8 @@
 </div>
 
 <script>
-    
+    var response_aid = null;
+
     $(document).on('submit', '#form', function(e){
                     e.preventDefault();
             $.ajax({
@@ -62,6 +66,9 @@
                 namer: $('#namer').val(),
                 csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
             },
+            'success': function fun (response) {
+                response_aid = response.aid;
+            }, 
             'error': function(e){
                 alert(e.fail);
             }  
@@ -71,17 +78,16 @@
 
 
         $(document).ready(function(){
-            
             function fun () {
                 $.ajax({
                     'type': 'GET',
-                    'url': '/post/js',
+                    'url': '/post/js/'+response_aid,
                     'success': function (response) {
                         var dm = $('#data_magic');
                         dm.empty();
                         for (var gg in response.am) {
                             var t = response.am[gg];
-                            dm.append(t.id);
+                            dm.append(t.name);
                         };
                         
                     },

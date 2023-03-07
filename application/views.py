@@ -30,12 +30,14 @@ class Home:
 
 
 class Post:
-    def js(self, request):
-        am = AppModel.objects.all()
+    def js(self, request, id):
+        am = AppModel.objects.get(id=id)
+        fam = AppModel.objects.filter(id=am.id)
         context = {
-            "am": list(am.values())
+            "am": list(fam.values())
         }
         return JsonResponse(context)
+
 
     def post(self, request):
         if request.method == 'POST':    
@@ -49,8 +51,11 @@ class Post:
                 s_app.user = request.user
                 s_app.save()
             
-            return redirect('post')
-        
+            context = {
+                'aid': original_app.id
+            }
+            return JsonResponse(context)
+            
 
         app = AppModel.objects.all()
 
