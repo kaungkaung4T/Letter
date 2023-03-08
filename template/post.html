@@ -56,46 +56,42 @@
 
 <script>
     
-
-    $(document).on('submit', '#form', function(e){
-                    e.preventDefault();
-            $.ajax({
-            'type': 'POST',
-            'url': '/post',
-            'data': {
-                namer: $('#namer').val(),
-                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
-            },
-            'success': function fun (response) {
-                response_aid = response.aid;
-            }, 
-            'error': function(e){
-                alert(e.fail);
-            }  
-
-        });
-        });
+    $(document).on('submit', '#form', function fun (e){
+                   e.preventDefault();
+                   
+                   $.ajax({
+                    'type': 'POST',
+                    'url': '/post',
+                    'data': {
+                        'namer': $('#namer').val(),
+                        'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+                    },
+                    'success': function f (response) {
+                        response_magic_id = response.aid;
+                    }
+                   });
+    });
 
 
-        $(document).ready(function(){
-            function fun () {
+    $(document).ready(function ff () {
+        
+            function fun_get () {
+
                 $.ajax({
                     'type': 'GET',
-                    'url': '/post/js/'+response_aid,
-                    'success': function (response) {
-                        var dm = $('#data_magic');
-                        dm.empty();
-                        for (var gg in response.am) {
-                            var t = response.am[gg];
-                            dm.append(t.name);
+                    'url': '/post/js/' + response_magic_id,
+                    'success': function ss (response) {
+                        $('#data_magic').empty();
+                        for (var r in response.am) {
+                            var t = response.am[r];
+                            $('#data_magic').append(t.name);
                         };
-                        
-                    },
-                    
+                    }
                 });
             };
 
-            setInterval(fun, 1000);
+            setInterval(fun_get, 1000);
+    });
 
-        });
+    
 </script>
