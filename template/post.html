@@ -56,10 +56,8 @@
 
 <script>
 
-
-    
-    $(document).on('submit', '#form', function (e){
-                    e.preventDefault();
+    $(document).on('submit', '#form', function (e) {
+                e.preventDefault();
 
             $.ajax({
                 'type': 'POST',
@@ -68,25 +66,26 @@
                     'namer': $('#namer').val(),
                     'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
                 },
-                'success': function(response){
-                    magice_response_id = response.aid
+                'success': function (response) {
+                    magice_response_id = response.aid;
                     fun();
                 }
             });
     });
-            
-            function fun () {
-                $.ajax({
-                    'type': 'GET',
-                    'url': '/post/js/' + magice_response_id,
-                    'success': function (response) {
-                        for (var v in response.am) {
-                            var t = response.am[v];
-                            $('#data_magic').append(t.name);
-                        };
-                    }
-                });
+
+
+    function fun () {
+        $.ajax({
+            'type': 'GET',
+            'url': '/post/js/' + magice_response_id,
+            'success': function (response) {
+                for (var a in response.am) {
+                    var t = response.am[a];
+                    $('#data_magic').append(t.name);
+                };
             }
+        });
+    }
     
             // setInterval(fun, 1000);
 
