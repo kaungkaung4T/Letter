@@ -1,10 +1,28 @@
 
+
+
 <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 <!-- <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
 <script defer src="https://pyscript.net/alpha/pyscript.js"></script> -->
-
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lrsjng.jquery-qrcode/0.17.0/jquery-qrcode.min.js"></script>
 
 <div style="margin: auto;width: 300px;margin-top: 150px;">
+
+
+<div id="qr_code">
+
+</div>
+
+
+<script>
+        $('#qr_code').qrcode(
+        {
+            'text': 'wefwefwefewf',
+            'background': 'white',
+            'foreground': 'black'
+        }
+        );
+</script>
 
 
 <form action="{% url 'post' %}" method="POST" enctype="multipart/form-data">
