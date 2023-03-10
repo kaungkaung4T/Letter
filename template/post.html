@@ -1,5 +1,7 @@
 
 <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<!-- <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+<script defer src="https://pyscript.net/alpha/pyscript.js"></script> -->
 
 
 <div style="margin: auto;width: 300px;margin-top: 150px;">
@@ -26,10 +28,6 @@
 </form>
 
 
-
-
-
-
 {% for apps in app %}
 
 {{ apps.user.username }}
@@ -54,38 +52,41 @@
 
 </div>
 
+
+
+
 <script>
 
     $(document).on('submit', '#form', function (e) {
                 e.preventDefault();
 
-            $.ajax({
-                'type': 'POST',
-                'url': '/post',
-                'data': {
-                    'namer': $('#namer').val(),
-                    'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
-                },
-                'success': function (response) {
-                    magice_response_id = response.aid;
-                    fun();
-                }
-            });
+                $.ajax({
+                    'type': 'POST',
+                    'url': '/post',
+                    'data': {
+                        'namer': $('#namer').val(),
+                        'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+                    },
+                    'success': function (response) {
+                        magic_response_aid = response.aid;
+                        fun();
+                    }
+                });
     });
 
 
-    function fun () {
-        $.ajax({
-            'type': 'GET',
-            'url': '/post/js/' + magice_response_id,
-            'success': function (response) {
-                for (var a in response.am) {
-                    var t = response.am[a];
-                    $('#data_magic').append(t.name);
-                };
-            }
-        });
-    }
+        function fun () {
+                $.ajax({
+                    'type': 'GET',
+                    'url': '/post/js/' + magic_response_aid,
+                    'success': function (response) {
+                        for (var a in response.am) {
+                            var t = response.am[a];
+                            $('#data_magic').append(t.name);
+                        }
+                    }
+                });
+        }
     
             // setInterval(fun, 1000);
 
