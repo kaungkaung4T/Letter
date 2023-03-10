@@ -9,19 +9,19 @@
 <div style="margin: auto;width: 300px;margin-top: 150px;">
 
 
-<div id="qr_code">
+<div id="qrcode">
 
 </div>
 
 
 <script>
-        $('#qr_code').qrcode(
-        {
-            'text': 'wefwefwefewf',
-            'background': 'white',
-            'foreground': 'black'
-        }
-        );
+    $('#qrcode').qrcode(
+            {
+                'render': 'canvas',
+                'background': 'white',
+                'foreground': 'black',
+            }
+    );
 </script>
 
 
